@@ -1,0 +1,11 @@
+PROJECT: SaidAzm (Unreal Engine 5). Goal: make the player's human character hold an AK-style rifle.
+
+Step 1. Import ak45.obj from the extracted zip folder into /Game/Weapons as a static mesh named SM_AK45. Use unreal.AssetImportTask (automated=True, save=True, replace_existing=True). The model is in centimeters, about 87 cm long, barrel pointing along +X, top is +Z. Do NOT rescale.
+
+Step 2. Find the human character in the project. Use unreal.AssetRegistryHelpers.get_asset_registry() to list all SkeletalMesh assets under /Game (skip anything under /Game/Weapons). Log every one found with unreal.log. Choose the most likely human character mesh (a name containing Mannequin, Character, Player, Man, Human, Said; otherwise the first one). If no SkeletalMesh exists, raise an exception that lists what was found.
+
+Step 3. On that skeletal mesh's skeleton, find the right hand bone (name containing hand_r, RightHand or Hand_R, case-insensitive; log all bone names first). Add a socket named WeaponSocket on that bone, with a small relative location/rotation so the rifle sits in the hand. Attach SM_AK45 to the socket as the socket's preview asset (add_preview_asset or equivalent) so it appears in the editor preview.
+
+Step 4. If the project has a Blueprint class for the player character (search Blueprint assets with names containing Character or Player), try adding a StaticMeshComponent named Weapon, with SM_AK45 as its mesh, attached to the mesh component at socket WeaponSocket. If this step fails, log a warning and continue; steps 1-3 are enough for success.
+
+Step 5. Save everything (EditorAssetLibrary.save_directory('/Game', only_if_is_dirty=True) and save_dirty_packages). Raise an exception on any failure in steps 1-3 instead of silently passing.

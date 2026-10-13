@@ -1,0 +1,40 @@
+[16:53:30] Ish boshlandi: ak45_task.zip
+[16:53:30] Vazifa: PROJECT: SaidAzm (Unreal Engine 5). Goal: make the player's human character hold an AK-style rifle.
+
+Step 1. Import ak45.obj from the extracted zip folder into /Game/Weapons as a static mesh named SM_
+[16:53:30] Urinish 1: Claude skript yozmoqda...
+[16:53:30] MUVAFFAQIYATSIZ: Groq xatosi 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
+Traceback (most recent call last):
+  File "C:\Users\asus\Desktop\UnrealAgent\ai_brain.py", line 116, in _call_groq
+    with urllib.request.urlopen(req, timeout=600) as r:
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 189, in urlopen
+    return opener.open(url, data, timeout)
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 495, in open
+    response = meth(req, response)
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 604, in http_response
+    response = self.parent.error(
+        'http', request, response, code, msg, hdrs)
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 533, in error
+    return self._call_chain(*args)
+           ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 466, in _call_chain
+    result = func(*args)
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\urllib\request.py", line 613, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\asus\Desktop\UnrealAgent\agent.py", line 54, in process
+    code = ai_brain.generate_script(CFG, task, extract_dir, code, report)
+  File "C:\Users\asus\Desktop\UnrealAgent\ai_brain.py", line 144, in generate_script
+    text = _call_groq(cfg, user_text, previous_code, error_report)
+  File "C:\Users\asus\Desktop\UnrealAgent\ai_brain.py", line 122, in _call_groq
+    raise RuntimeError(f"Groq xatosi {e.code}: {e.read().decode('utf-8', 'ignore')[:500]}")
+RuntimeError: Groq xatosi 404: {"error":{"message":"The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.","type":"invalid_request_error","code":"model_not_found"}}
+
+

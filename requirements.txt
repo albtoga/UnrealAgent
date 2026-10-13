@@ -1,0 +1,3 @@
+# Gemini uchun qo\x27shimcha kutubxona kerak emas.
+# Faqat provider=anthropic bo\x27lsa:
+anthropic>=0.40.0

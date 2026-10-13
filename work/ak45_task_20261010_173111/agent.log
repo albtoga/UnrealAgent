@@ -1,0 +1,35 @@
+[17:31:11] Ish boshlandi: ak45_task.zip
+[17:31:11] Vazifa: PROJECT: SaidAzm (Unreal Engine 5). Goal: make the player's human character hold an AK-style rifle.
+
+Step 1. Import ak45.obj from the extracted zip folder into /Game/Weapons as a static mesh named SM_
+[17:31:11] Urinish 1: Claude skript yozmoqda...
+[17:31:17] Unreal ishga tushmoqda...
+[17:31:17] MUVAFFAQIYATSIZ: [WinError 2] Не удается найти указанный файл
+Traceback (most recent call last):
+  File "C:\Users\asus\Desktop\UnrealAgent\agent.py", line 56, in process
+    ok, report = unreal_runner.run_unreal(CFG, code, job, attempt)
+                 ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus\Desktop\UnrealAgent\unreal_runner.py", line 52, in run_unreal
+    proc = subprocess.Popen(cmd, shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\asus\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1554, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+FileNotFoundError: [WinError 2] Не удается найти указанный файл
+

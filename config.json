@@ -1,0 +1,13 @@
+{
+  "provider": "groq",
+  "groq_model": "openai/gpt-oss-120b",
+  "anthropic_model": "claude-sonnet-5-5",
+  "unreal_editor_exe": "C:/Program Files/Epic Games/UE_5.8/Engine/Binaries/Win64/UnrealEditor-Cmd.exe",
+  "project_path": "C:/Users/asus/Documents/Unreal Projects/ProjectNomi/ProjectNomi.uproject",
+  "run_mode": "commandlet",
+  "inbox_dir": "inbox",
+  "work_dir": "work",
+  "max_attempts": 3,
+  "unreal_timeout_seconds": 3600,
+  "notification_seconds": 3
+}

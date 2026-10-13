@@ -1,0 +1,193 @@
+# UnrealAgent: to'liq yordam
+
+## Bu nima?
+Bu dastur sen uchun Unreal Engine'da ishlaydi.
+Sen zip fayl tashlaysan va nima qilish kerakligini yozasan. Dastur o'zi Unreal'ni ochadi, ishni qiladi va yopadi. Sen shu orada boshqa ish qilaverasan.
+
+Ish tugaganda ekranning tepasida 3 soniya yozuv chiqadi:
+- **Yashil**: Ish muvaffaqiyatli yakunlandi
+- **Qizil**: Ish muvaffaqiyatsiz bo'ldi (yoki vazifa noto'g'ri yozilgan)
+
+---
+
+## 1. Nima kerak
+- 
+- Windows kompyuter
+- Unreal Engine va o'zingning loyihang
+- Python (python.org dan yuklab o'rnat)
+- Bepul AI kalit (masalan, console.groq.com/keys)
+
+## 2. O'rnatish (bir marta qilinadi)
+
+### 2.1. AI kalitni saqlash
+1. console.groq.com/keys ga kirib, **Create API Key** ni bos va kalitni nusxala.
+2. Terminalni och (`Win + R`, `cmd`, Enter) va yoz:
+```
+   setx GROQ_API_KEY "kalitingni-shu-yerga-yoz"
+```
+3. Terminalni yop. Kalitni hech kimga ko'rsatma va chatga, GitHub'ga yozma.
+
+### 2.2. config.json ni to'ldirish
+`config.json` faylini Notepad yoki VS Code bilan och. Mana kerakli qatorlar:
+
+```json
+"provider": "groq",
+"unreal_editor_exe": "C:/Program Files/Epic Games/UE_5.4/Engine/Binaries/Win64/UnrealEditor-Cmd.exe",
+"project_path": "D:/Games/MyProject/MyProject.uproject",
+```
+
+- `provider`: qaysi AI ishlatilishi (`groq`, `gemini` yoki `nvidia`).
+- `unreal_editor_exe`: Unreal dasturining yo'li. Pastdagi 2.3 bo'limda qanday topish ko'rsatilgan.
+- `project_path`: loyihangdagi `.uproject` faylning yo'li. Fayl ustida `Shift` bosib o'ng tugma bos, **Copy as path** ni tanla va yopishtir.
+
+Muhim qoidalar:
+- Yo'lda `\` emas, `/` ishlat.
+- Yo'l atrofidagi qo'shtirnoq bittadan bo'lsin.
+- Har qator oxirida vergul bo'ladi, faqat eng oxirgi qatorda bo'lmaydi.
+
+### 2.3. Unreal yo'lini qanday topaman?
+1. Unreal Editor'da loyihangni och.
+2. `Ctrl + Shift + Esc` bilan Task Manager'ni och.
+3. **UnrealEditor** ni topib, ustida o'ng tugma bos va **Open file location** ni tanla.
+4. Ochilgan papkada `UnrealEditor-Cmd.exe` bormi qara. Papka yo'lini nusxala va oxiriga `/UnrealEditor-Cmd.exe` qo'shib config'ga yoz.
+
+Yo'l to'g'rimi, tekshirish (PowerShell'da):
+```
+Test-Path "SHU_YERGA_YO'LNI_YOZ"
+```
+`True` chiqsa to'g'ri, `False` chiqsa noto'g'ri.
+
+### 2.4. Unreal'da pluginni yoqish
+1. Unreal'da loyihani och.
+2. **Edit, Plugins** ni bos.
+3. Qidiruvga `Python` yoz, **Python Editor Script Plugin** ni yoq.
+4. **Restart Now** ni bos, keyin Unreal'ni yop.
+
+---
+
+## 3. Ishga tushirish
+1. Dastur papkasini terminalda och. Eng oson yo'li: VS Code'da **File, Open Folder** orqali papkani och, keyin **Terminal, New Terminal**. Papka yo'lida bo'sh joy yoki g'alati belgi bo'lsa, papkani `C:\UnrealAgent` ga ko'chir.
+2. Yoz:
+```
+   python agent.py
+```
+3. Terminalda "Kuzatilmoqda..." yozuvi chiqadi. Oynani yopma, minimize qil.
+4. Unreal Editor ochiq bo'lmasin (loyiha boshqa joyda ochiq turmasin).
+
+---
+
+## 4. Vazifani qanday beraman?
+
+Dasturga "nima qilish kerakligini" oddiy matn fayl orqali aytasan. Bu fayl `task.txt` deb ataladi.
+
+### Usul 1: zip ichiga task.txt
+1. Papka och va ichiga kerakli fayllarni sol (masalan `ak.fbx`).
+2. Papka ichida o'ng tugma, **New, Text Document** ni bos va nomini `task.txt` qil.
+3. Faylni och va nima qilish kerakligini yoz (pastda namunalar bor).
+4. Saqla, so'ng papkani zip qil (o'ng tugma, **Send to, Compressed (zipped) folder**).
+5. Zipni dastur papkasidagi `inbox` papkasiga tashla.
+
+### Usul 2: zip yonida alohida fayl
+`model.zip` va yoniga `model.txt` yoz (nomlari bir xil bo'lsin). Ikkalasini ham `inbox` ga tashla.
+
+Eslatma: Windows'da fayl kengaytmasi yashirin bo'lsa, `task.txt` aslida `task.txt.txt` bo'lib qolishi mumkin. Explorer'da **View, Show, File name extensions** ni yoqib tekshir.
+
+### Vazifani yaxshi yozish qoidalari
+- Aniq yoz. Papka va fayl nomlarini ko'rsat.
+- Bitta zipga bitta ish ber. Katta ishni bir nechta zipga bo'l.
+- Ingliz tilida yozsang, AI yaxshiroq tushunadi.
+- Kamida bir-ikki to'liq gap yoz. 15 belgidan qisqa vazifa qabul qilinmaydi.
+
+---
+
+## 5. Tayyor namunalar
+Har birining tepasida nima qilishi yozilgan. Tagidagi matnni `task.txt` ga ko'chir.
+
+**Rasmlarni Unreal'ga olib kirish**
+```
+Import all .png and .jpg files from the zip into /Game/Textures/Imported. Save all assets.
+```
+
+**3D modellarni olib kirish**
+```
+Import all .fbx files from the zip into /Game/Models/Imported as static meshes. Do not change their size. Save all assets.
+```
+
+**Modellarni levelga qatorlab qo'yish**
+```
+Import all .fbx files from the zip into /Game/Models/Imported. Then open the level /Game/Maps/MainLevel and place each model in a straight line along the X axis, 300 units apart. Save the level.
+```
+
+**Papkalar yaratish (tartib uchun)**
+```
+Create these folders under /Game: Characters, Weapons, Environment, Materials, Textures, Blueprints, Audio, UI. Do not delete or move anything.
+```
+
+**Nomlarni tartibga solish**
+```
+In /Game/Models/Imported add the prefix SM_ to every static mesh name, and in /Game/Textures/Imported add the prefix T_ to every texture name, if they do not have it already. Save all assets.
+```
+
+**Yangi bo'sh level yaratish**
+```
+Create a new level at /Game/Maps/TestLevel with a directional light, sky atmosphere, sky light and a large flat floor. Save the level.
+```
+
+**Qurolni personajga biriktirish**
+```
+Import ak.fbx from the zip into /Game/Weapons as SM_AK. Find the human character's skeletal mesh, add a socket named WeaponSocket on the right hand bone, and attach SM_AK to it. Save all assets. Report an error if the character or hand bone is not found.
+```
+Eslatma: qurol qo'lga yopishadi, lekin qurolni ushlash animatsiyasini bu vazifa qilmaydi.
+
+**Loyihada nima borligini sanash (hech narsani o'zgartirmaydi)**
+```
+Do not change anything. List all assets under /Game grouped by type and log how many there are of each type.
+```
+
+---
+
+## 6. Natijani qayerdan ko'raman?
+- **Ekranda**: yashil yoki qizil yozuv 3 soniya chiqadi.
+- **Terminalda**: ish qadamlari yozib boriladi.
+- **Zip qayerga tushadi**:
+  - `inbox/done`: ish muvaffaqiyatli bo'ldi.
+  - `inbox/failed`: xato bo'ldi.
+- **Batafsil log**: `work` papkasidagi eng yangi papka ichida `agent.log` va `unreal_1.log`. Xato sababi o'sha yerda yozilgan.
+
+---
+
+## 7. Xatolar va ularni tuzatish
+
+| Xato yozuvi | Sabab | Nima qilish kerak |
+|---|---|---|
+| `Vazifa topilmadi` yoki qizil "Vazifa noto'g'ri yozilgan" | `task.txt` yo'q, bo'sh yoki juda qisqa | 4-bo'limni qara, vazifani aniqroq yoz |
+| `WinError 2` / `Не удается найти указанный файл` | `config.json` dagi `unreal_editor_exe` yo'li noto'g'ri | 2.3 bo'limdagi usul bilan yo'lni to'g'rila |
+| `401` yoki `invalid authentication` | AI kalit noto'g'ri saqlangan | Kalitni qayta nusxala, `setx` ni qaytar, VS Code'ni yopib qayta och |
+| `GROQ_API_KEY o'rnatilmagan` | Kalit saqlanmagan yoki terminal eski | `setx` dan keyin terminalni yopib yangisini och |
+| `404` va "model not found" | Model nomi eskirgan yoki hisobingda ochiq emas | `config.json` ga `"groq_model": "openai/gpt-oss-120b"` qo'sh |
+| `429` | Bepul limit tugagan | Bir oz kut, dastur o'zi qayta urinadi |
+| `cd` buyrug'i papkani topmaydi | Papka yo'lida bo'sh joy yoki ko'rinmas belgi bor | Papkani `C:\UnrealAgent` ga ko'chir |
+| Terminal o'zi yopilib ketdi | Oyna yopilgan yoki kompyuter qotgan | `work` dagi `agent.log` ni o'qi, oddiy Command Prompt'da ishga tushir |
+| `SyntaxError` | Kodni tahrirlaganda qo'shtirnoq yoki qavs o'chib ketgan | O'chib ketgan belgini joyiga qo'y |
+| Ish tugadi, lekin natija yo'q | AI noto'g'ri skript yozgan | `unreal_1.log` ni o'qi, vazifani aniqroq yozib qayta ber |
+
+---
+
+## 8. Xabar matnlarini o'zgartirish
+- Terminal va ekrandagi yozuvlar `agent.py` faylida (`say(...)` va `notify(...)` qatorlari).
+- Xato matnlari `ai_brain.py` da (`RuntimeError(` qatorlari).
+- Yashil/qizil oyna ko'rinishi `notify.py` da.
+- Yordam sahifasi havolasi `config.json` da: `"help_url": "https://github.com/albtoga/UnrealAgent/yordam"`
+
+---
+
+## 9. Xavfsizlik
+- AI kalitni hech qachon fayllarga yoki GitHub'ga yozma. U faqat `setx` orqali saqlansin.
+- Kalit boshqaga ko'rinib qolsa, saytdan o'chirib yangisini yarat.
+- Muhim ishdan oldin loyihangning nusxasini saqla. Dastur fayllarni o'zgartiradi.
+- GitHub'ga yuklashdan oldin `config.json` dan shaxsiy yo'llarni olib tashla.
+
+## 10. Cheklovlar
+- Dastur ba'zan xato qiladi. Xato bo'lsa, o'zi 3 martagacha tuzatib qayta urinadi, lekin har doim ham chiqmaydi.
+- Murakkab Blueprint grafiklari va animatsiyalar har doim ishlamaydi.
+- Bepul AI kalitlarda so'rovlar soni cheklangan, ba'zan kutish kerak bo'ladi.
